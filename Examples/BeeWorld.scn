@@ -1,0 +1,124 @@
+// The Bee World Example:
+// A five sided prism called the 'bee' moves through the world with
+// a tree. The sun can be moved as well in order to observe the 
+// changing lighting conditions.
+// An additional feature: flying trees...
+
+WORLD "BeeWorld" (
+  AMBIENT (0.3,0.3,0.3);
+  BACKGROUND (0,0.1,0.3);
+  SENSORCOLOR (0.5,0,0);
+  SURFACE "standard"(0.5,0.5,0.5,0.5,0.5);
+  SURFACE "yellow" (0.8, 0.5, 0.0);
+  SURFACE "green"  (0.2, 1, 0.2);
+  SURFACE "hive" (0.5,0.3,0.1,1);
+  MACRO GROUP "spot" [
+    POLYEDER "p1" (
+    BASEPOINTS ((-50,-50,0), (-50,50,0),(50,50,0),(50,-50,0));
+    SWEEP (0,0,10);
+      SURFACE "green";
+    );
+    POLYEDER "p2" (
+      BASEPOINTS ((-40,-30,12), (-40,-20,12),(-30,-20,12),(-30,-30,12));
+      FACES ((0,1,2,3));
+      SURFACE "yellow";
+    );
+    POLYEDER "p3" (
+      BASEPOINTS ((10,10,12), (20,20,12),(10,30,12),(0,20,12));
+      FACES ((0,1,2,3));
+      SURFACE "yellow";
+    )
+  ];
+  MACRO EXTENDIBLE "tree" (
+    Z_AXIS;
+    RANGE (0, 50);
+    FACTOR 5;
+    START 1;
+  ) [
+    POLYEDER "trunc2" (
+      BASEPOINTS ((11,0,1), (6,0,51));
+      ROTATE 6;
+      SURFACE "standard";
+    );
+    POLYEDER "leaves" (
+      BASEPOINTS ((30,0,51), (60,0,90), (50,0,120), (20,0,140));
+      ROTATE 6;
+      SURFACE "green";
+    )
+  ];
+)[ 
+  POLYEDER "base"(
+    SURFACE "standard";
+    BASEPOINTS ((-400,-400,0),(-400,400,0),(400,400,0),(400,-400,0));
+    FACES ((0,1,2,3));
+  );
+  MACRO "spot" AS "spot1" ( MOVETO (-50,300,1) );
+  MACRO "spot" AS "spot2" ( MOVETO (200,50,1); TURNZ 30 );
+  MACRO "tree" ( MOVETO (180,-100, 1) );
+  POLYEDER "hive" (
+    BASEPOINTS ((-50, -50, 0), (-50, 50, 0), (50, 50, 0), (50, -50, 0),
+                (-50, -50, 30), (-50, 50, 30), (50, 50, 30), (50, -50, 30));
+    FACES ((0,1,2,3), (0,1,5,4), (1,2,6,5), (2,3,7,6), (3,0,4,7));
+    SURFACE "hive";
+    MOVETO (-30,-60,1);
+  );
+  WHISKERFIELD "hiveWhisker" (
+    RESOLUTION (11,11);
+    SIZE (80,80);
+    LENGTH 20;
+    MOVETO (-30,-60,2);
+  );
+
+  VEHICLE "bee" (
+    RESTR_TRANS_X (-2,0,10);
+    RESTR_ROT_Z (-20,0,20);
+    RESTR_ROT_Y  (-10,0,15);
+    MOVETO (0,0,100);
+    PATH "eye" = "camera";
+  )[
+    POLYEDER "torso" (
+      BASEPOINTS ((10,0,-20), (10,0,20));
+      ROTATE 5;
+      TURNY -90;
+    );
+    CAMERA "camera" (
+      TURNY 90;
+      TURNX -90;
+      MOVETO (22,0,0);
+      RESOLUTION (40,60);
+      SIZE (1.2,1.2);
+      CLASS 0; CLASS 1; CLASS 2;
+      ZBUFFER;
+    );
+    WHISKER "antenna1" (
+      LENGTH 10;
+      MOVETO (22,5,0);
+      TURNY 90;
+      TURNZ 20;
+    );
+    WHISKER "antenna2" (
+      LENGTH 10;
+      MOVETO (22,-5,0);
+      TURNY 90;
+      TURNZ -20;
+    );
+    TACTILE "bump" (
+      LENGTH 20;
+      MOVETO (22,0,0);
+      TURNY 140;
+      CLASS 1;
+    )
+  ];
+  TURNABLE "orbit" (
+    Z_AXIS;
+    TURNY -60;
+    FACTOR 5;
+  ) [
+    RADIALEMITTER "sun" (
+      MOVETO (1000,0,0);
+      START 1;
+      RADIATION (1,1,1);
+      FACTOR 1000000;
+    )
+  ]
+].

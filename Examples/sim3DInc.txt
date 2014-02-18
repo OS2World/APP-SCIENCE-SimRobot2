@@ -1,0 +1,25 @@
+sim3DInc.cpp helps to rewrite "SimRobot for Unix" controllers
+for "SimRobot for Win32 / OS/2". All you have to do is
+
+- under Windows, you must compile for Win32 (see README).
+- rename all your *.cc files to *.cpp
+- add Examples\sim3DInc.cpp and your *.cpp files to the project. 
+  Disable "destructor cleanup" for sim3DInc.cpp and all your files.
+  Otherwise the controller will crash.
+- instead of including sim3DInc.hh in your files, include 
+  Examples\sim3DInc.h.
+- change your main function's type to
+    int Main(int argc,char* argv[]); // capital M!
+- remove any signal handling.
+- remove all console I/O (you may use files instead).
+- rename your scene's WORLD object:
+    WORLD "sim3DInc" // case is important!
+
+Limitations:
+- You can link only one sim3DInc-controller to SimRobot.
+- If you reset the simulation before your controller has ended, the
+  memory the controller has allocated is not freed until you leave SimRobot.
+- Unlike other controllers, sim3DInc starts your controller during the
+  first simulation step and not immediatly after the scene has been
+  copiled.
+

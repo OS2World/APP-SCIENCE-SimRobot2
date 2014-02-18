@@ -1,0 +1,56 @@
+SimRobot Layout
+2
+0 0 0 905 538
+.
+0 2 10
+0 197 377 699 92
+0 4744 4744
+1 12
+Tree
+0 0 0 197 469
+1 0 0 12 16 47 835
+Object
+0 198 0 290 295
+.
+4 0 1 9 180 252 4
+Sensor
+0 760 0 136 100
+.wheelchair.frame.us0.VALUE
+1 0 0.5
+Sensor
+0 624 0 136 100
+.wheelchair.frame.us1.VALUE
+1 0 0.5
+Sensor
+0 488 0 136 100
+.wheelchair.frame.us2.VALUE
+1 0 0.5
+Sensor
+0 488 100 136 99
+.wheelchair.frame.us3.VALUE
+1 0 0.5
+Sensor
+0 488 199 136 96
+.wheelchair.frame.us4.VALUE
+1 0 0.5
+Sensor
+0 624 198 136 97
+.wheelchair.frame.us5.VALUE
+1 0 0.5
+Sensor
+0 760 199 136 96
+.wheelchair.frame.us6.VALUE
+1 0 0.5
+Sensor
+0 760 100 136 99
+.wheelchair.frame.us7.VALUE
+1 0 0.5
+Actor
+0 198 295 352 82
+.wheelchair.SPEED
+1 50
+Actor
+0 550 295 346 82
+.wheelchair.STEERING
+1 40
+1 3 13 12 11 10 9 8 7 6 5 4 2 

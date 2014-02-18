@@ -1,0 +1,101 @@
+// RobotArm.scn:
+// A simple example for a Robotarm
+
+WORLD "RobotArm" (
+//  QUICKSHADING;		
+  AMBIENT (0.1);		// Ambient lighting set to 0.1
+  BACKGROUND (0.1);		// Background color set to 0.1
+  SURFACE "Standard" (0.8);	// Color "Standard" set to 0.8
+  SURFACE "Basis" (0.4);	// Color "Basis" set to 0.4
+  PATH "joint2" = "joint1.joint2";
+  PATH "joint3" = "joint1.joint2.joint3";
+) [ 
+  CAMERA "camera"(		// Camera with resolution 60x60 pointing
+    TURNX -110;			// at the scene 
+    TURNZ -20;
+    MOVETO (-200,-400,400);
+    RESOLUTION (60,60);
+    SIZE (1,1);
+    ZBUFFER;
+    CLASS 0;
+  );
+  RADIALEMITTER "lamp"(		// A light source 
+    MOVETO (-800,-600,600);
+    FACTOR 1200000;
+    START 1;
+    RADIATION (1.0);
+  );
+
+  POLYEDER "base" (		// The robot base
+    BASEPOINTS ((-400, -400, 0), (-400, 400, 0),
+		(400, 400, 0), (400, -400, 0));
+    FACES ((0,1,2,3));
+    SURFACE "Basis";
+  );
+
+  POLYEDER "column" (		// A column (created by rotation)
+    BASEPOINTS ((50, 0, 0), (50, 0, 260));
+    ROTATE 10;
+    SURFACE "Standard";
+    MOVETO (-140, 220, 2);
+  );
+
+  TURNABLE "joint1" (		// The robot arm
+    Z_AXIS;
+    RANGE (40,180);
+    START 60;
+    FACTOR 20;
+    MOVETO (0, 20, 1.5);
+  ) [
+    POLYEDER "basis" (
+      BASEPOINTS ((-60, -50, 0), (60, -50, 0), (0, -50, 100));
+      SWEEP (0, 100, 0);
+      SURFACE "Standard";
+    );
+    TURNABLE "joint2" (
+      Y_AXIS;
+      RANGE (-90, 90);
+      START 0;
+      FACTOR 20;
+      MOVETO (0,0,102);
+    ) [
+      POLYEDER "forearm" (
+        BASEPOINTS ((-40, -50, 130), (-40, -50, 70), (0, -50, 2), 
+                    (40, -50, 70), (40, -50, 130),
+                    (-40, 0, 200), (-40, 0, 130), (40, 0, 130), (40, 0, 200),
+                    (-40, 50, 200), (-40, 50, 70), (0, 50, 2), 
+                    (40, 50, 70), (40, 50, 200));
+        FACES
+        ((0,1,2,3,4),
+         (5,6,7,8),
+         (9,10,11,12,13),
+         (1,2,11,10),
+         (3,2,11,12),
+         (0,4,7,6),
+         (5,8,13,9),
+         (8,7,4,3,12,13),
+         (5,6,0,1,10,9));
+        SURFACE "Standard";
+      );
+      TURNABLE "joint3" (
+        Y_AXIS;
+        RANGE (-100, 100);
+        START -90;
+        FACTOR 20;
+        MOVETO (0, 0, 175);
+      ) [
+        POLYEDER "upperarm" (
+          BASEPOINTS ((-10, 0, 200), (-10, 0, -10), (10, 0, -10), (10, 0, 200));
+          SWEEP (0, 30, 0);
+          MOVETO (0, -32, 0);
+          SURFACE "Standard";
+        );
+        RECEPTOR "r1" (			// A color sensor
+          MOVETO (0,-32,201);
+          CLASS 0;
+        );
+      ];
+    ];
+  ];
+].
+

@@ -1,0 +1,88 @@
+/*********************************************************************** 
+ ****                                                               **** 
+ **** SimRobot                                                      **** 
+ **** Copyright (c) 1995 Center for Cognitive Sciences,             ****
+ ****                    Fachbereich 3 - Computer Science           **** 
+ ****                    University of Bremen, Germany              ****
+ ****                                                               **** 
+ ***********************************************************************/ 
+
+****************************************************************************
+********************** Software Release Agreement **************************
+****************************************************************************
+
+Copyright (c) 1995 Center for Cognitive Sciences,
+		   University of Bremen, Germany
+
+The robot simulation software SimRobot V1.2 (hereinafter referred 
+to as "SimRobot") was developed by the SimRobot group at the Center for
+Cognitive Sciences, University of Bremen, Germany (hereinafter referred 
+to as "SimRobot group"). 
+
+******* IMPORTANT: **********************************************************
+***     Please read this agreement carefully before using this software.  ***
+***     By using, copying or redistributing SimRobot, you accept and      ***
+***     agree to become bound by the terms of this agreement. Please do   ***
+***     not use this software, if you do not accept the terms of this     ***
+***     agreement.                                                        ***	
+*****************************************************************************
+
+Permission to use, copy, modify and distribute the software is granted to the
+user (hereafter refered to as "user"), subject to the following restrictions 
+and understandings:
+
+1.  SimRobot is distributed free of charge for non-profit use. Any commercial
+    exploitation of SimRobot, as a standalone program, as a part of a more 
+    comprehensive system or in any other constellation, is prohibited by 
+    this agreement. Please contact the SimRobot group, if you are interested 
+    in a commercial version of SimRobot.
+
+2.  Any copy made of SimRobot must cover the complete distribution, as it was
+    received by the user, especially including this agreement in full, the 
+    complete documentation, all of the tools and examples.
+
+3.  Users of SimRobot agree to make their best efforts to inform the SimRobot 
+    group of noteworthy uses of this system.
+   
+4.  All materials, developed as a consequence of SimRobot, shall duly 
+    acknowledge such use, in accordance with the usual standards of 
+    acknowledging credit in academic research.
+    
+5.  The SimRobot group makes no warranty or representation, either expressed
+    or implied, for SimRobot, including, but not limited to, the implied
+    warranties of merchantability and fitness for a particular purpose. 
+    The entire risk as to the functioning, faultless operation, quality,
+    performance and effect on hardware or other software of SimRobot is with 
+    the user. Should SimRobot prove defective, the user assumes the 
+    cost of all necessary servicing, repair of correction.
+    
+6.  In no event, unless required by applicable law, will the SimRobot group
+    be liable for any direct, indirect, special, incidental, or consequential, 
+    damages arising out of the use of or inability to use SimRobot, even if
+    advised of the possibility of such damages. Specifically, the SimRobot 
+    group is not responsible for any costs including, but not limited to, 
+    those incurred as a result of lost profits or revenue, loss of use of 
+    the product, loss of data, the costs of recovering such software or 
+    data, the cost of substitute software or data, claims by third parties 
+    or for other similar costs.
+    
+7.  The SimRobot group is under no obligation to provide any services, by 
+    way of maintenance, consultation, update, or otherwise. 
+   
+8.  In conjunction with products arising from the use of the system,
+    there shall be no use of the name of the SimRobot group, the Center for
+    Cognitive Sciences, the University of Bremen nor of any adaptation 
+    thereof in any advertising, promotional, or sales literature without 
+    prior written consent from the SimRobot group in each case.
+   
+9.  This agreement is taking effect after using, copying or redistributing
+    SimRobot. By using, copying or redistributing SimRobot, the user 
+    accepts and agrees to become bound by the terms of this agreement.
+ 
+To contact the SimRobot group, please write by e-mail to: 
+    simrobot@informatik.uni-bremen.de
+
+
+Bremen, September 1995
+-- The SimRobot group --
+

@@ -1,0 +1,261 @@
+// Ncc1701d.scn:
+// This example is just for fun. It shows the USS 
+// Enterprise NCC-1701D. You can vary the camera's 
+// position with z.MOVE, z.x.MOVE and z.x.distance.MOVE.
+
+WORLD "NCC-1701D" (
+  QUICKSHADING;
+
+  SURFACE "duranium" (0.5,0.5,0.5);
+  SURFACE "warp" (1,0.1,0);
+  SURFACE "plasma" (0,0,1);
+  SURFACE "white" (1,1,1);
+  
+  MACRO POLYEDER "living section" (
+    BASEPOINTS (
+      (50,0,40),
+      (200,0,25),
+      (300,0,5),
+      (400,0,5),
+      (400,0,-5),
+      (300,0,-5),
+      (200,0,-25),
+      (50,0,-40)
+    );
+    ROTATE 32;
+    SURFACE "duranium";
+  );
+
+  MACRO GROUP "base" [
+    POLYEDER "front" (
+      BASEPOINTS (
+        (-100,0,0),
+        (-75,5,0),
+        (-20,30,0),
+        (20,30,0),
+        (75,5,0),
+        (100,0,0),
+        (75,-5,0),
+        (20,-30,0),
+        (-20,-30,0),
+        (-75,-5,0)
+      );
+      SWEEP (0,0,150);
+      SURFACE "duranium";
+    );
+    POLYEDER "back" (
+      BASEPOINTS (
+        (-100,0,0),
+        (-75,5,0),
+        (-20,30,0),
+        (20,30,0),
+        (75,5,0),
+        (100,0,0),
+        (75,-5,0),
+        (20,-30,0),
+        (-20,-30,0),
+        (-75,-5,0),
+        (-100,0,150),
+        (100,0,150)
+      );
+      FACES (
+        (0,1,10),
+        (1,2,10),
+        (2,3,11,10),
+        (3,4,11),
+        (4,5,11),
+        (5,6,11),
+        (6,7,11),
+        (7,8,10,11),
+        (8,9,10),
+        (9,0,10)
+      );
+      SURFACE "duranium";
+      MOVETO (0,0,150);
+    );
+    POLYEDER "shield's generator" (
+      BASEPOINTS (
+        (-100,0,0),
+        (-75,5,0),
+        (-20,30,0),
+        (20,30,0),
+        (75,5,0),
+        (100,0,0),
+        (75,-5,0),
+        (20,-30,0),
+        (-20,-30,0),
+        (-75,-5,0)
+      );
+      FACES ((0,1,2,3,4,5,6,7,8,9));
+      SURFACE "warp";
+      COLOR (1,0,0);
+      SCALE 0.6;
+      MOVETO (0,0,-1);
+    );
+    POLYEDER "center" (
+      BASEPOINTS (
+        (-100,0,0),
+        (-75,5,0),
+        (-20,30,0),
+        (20,30,0),
+        (75,5,0),
+        (100,0,0),
+        (75,-5,0),
+        (20,-30,0),
+        (-20,-30,0),
+        (-75,-5,0)
+      );
+      FACES ((0,1,2,3,4,5,6,7,8,9));
+      SURFACE "white";
+      SCALE 0.3;
+      MOVETO (0,0,-2);
+    );
+  ];
+
+  MACRO POLYEDER "plasma" (
+    BASEPOINTS (
+      (0,-10,0),
+      (0,-10,900),
+      (0,10,900),
+      (0,10,0)
+    );
+    FACES ((0,1,2,3));
+    SURFACE "plasma";
+    COLOR (0,0,1);
+  ); 
+
+  MACRO GROUP "engine" (
+    SCALE 0.35;
+  )[
+    POLYEDER "tube" (
+      BASEPOINTS (
+        (-50,-50,0),
+        (-70,-25,0),
+        (-70,25,0),
+        (-50,50,0),
+        (50,50,0),
+        (70,25,0),
+        (70,-25,0),
+        (50,-50,0)
+      );
+      SWEEP (0,0,900);
+      SURFACE "duranium";
+    );
+    POLYEDER "warp" (
+      BASEPOINTS (
+        (-50,-50,0),
+        (-70,-25,0),
+        (-70,25,0),
+        (-50,50,0),
+        (50,50,0),
+        (70,25,0),
+        (70,-25,0),
+        (50,-50,0)
+      );
+      SWEEP (0,0,40);
+      SURFACE "warp";
+      COLOR (1,0,0);
+      SCALE 0.8;
+      TURNY 180;
+    );
+    MACRO "plasma" AS "plasma1" (MOVETO (-71,0,0));
+    MACRO "plasma" AS "plasma2" (MOVETO (71,0,0));
+    POLYEDER "plasma3" (
+      BASEPOINTS (
+        (-70,-10,0),
+        (70,-10,0),
+        (70,10,0),
+        (-70,10,0)
+      );
+      FACES ((0,1,2,3));
+      SURFACE "plasma";
+      COLOR (0,0,1);
+      MOVETO (0,0,901);
+    );
+  ];
+      
+  MACRO POLYEDER "engine holder" (
+    BASEPOINTS (
+      (0,0,0),
+      (0,0,70),
+      (100,0,70),
+      (100,0,0),
+      (100,-50,0),
+      (100,-50,70)
+    );
+    FACES (
+      (0,1,2,3),
+      (2,3,4,5)
+    );
+    SURFACE "duranium";
+  );
+  
+  MACRO POLYEDER "living section holder" (
+    BASEPOINTS (
+      (0,0,0),
+      (-20,0,120),
+      (20,0,120),
+      (0,-100,-30),
+      (-60,-100,60),
+      (60,-100,60)
+    );
+    FACES (
+      (0,1,3),
+      (0,2,3),
+      (3,1,4),
+      (3,2,5),
+      (1,2,5,4)
+    );
+    SURFACE "duranium";
+  );
+
+  MACRO GROUP "engine section" (
+    SCALE 1.3;
+    TURNX -90;
+  )[
+    MACRO "base";
+    MACRO "living section holder" (MOVETO (0,-30,0));
+    MACRO "engine holder" AS "left engine holder" (MOVETO (100,0,230));
+    MACRO "engine holder" AS "right engine holder" (MOVETO (-100,0,300); TURNY 180);
+    MACRO "engine" AS "left engine" (MOVETO (200,-70,30));
+    MACRO "engine" AS "right engine" (MOVETO (-200,-70,30));
+  ];
+  
+  MACRO GROUP "Enterprise" [
+    MACRO "living section";
+    MACRO "engine section" (MOVETO (0,320,-174));
+  ];
+
+  MACRO TURNABLE "z" (
+    Z_AXIS;
+    FACTOR 10;
+    START 40;
+  )[
+    TURNABLE "x" (
+      X_AXIS;
+      FACTOR 10;
+      START 30;
+    )[
+      RADIALEMITTER "lamp" (
+        RADIATION (1,1,1);
+        FACTOR 1000000;
+        MOVETO (0,-1000,0);
+      );
+      EXTENDIBLE "distance" (
+        Y_AXIS;
+        FACTOR 50;
+        START -700;
+      )[
+        CAMERA "camera" (
+          RESOLUTION (200,200);
+          ZBUFFER;
+          CLASS 0; CLASS 1; CLASS 2;
+          TURNX -90;
+        );
+      ];
+    ];
+  ];
+)[
+  MACRO "Enterprise" (MOVETO (0,-100,-50); SCALE 0.5);
+  MACRO "z";
+].

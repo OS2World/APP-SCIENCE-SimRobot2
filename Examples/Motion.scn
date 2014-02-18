@@ -1,0 +1,53 @@
+// Motion.sim:
+// multiple textured surfaces in different distances
+
+WORLD "Motion" (
+  REMARK "cam";
+  QUICKSHADING;
+  AMBIENT (1);
+  BACKGROUND (0);
+  TEXTURE "wallpaper" SPECIAL 1;
+  SURFACE "standard"(1.0);
+  SURFACE "wallpaper" (1.0) [
+    TEXTURE "wallpaper" ((0,0,1));
+    SIZE (50,50);
+    WRAPAROUND
+  ];
+) [
+  POLYEDER "base"(
+    BASEPOINTS ((-10,10,10),(-10,-10,10),(10,-10,10),(10,10,10));
+    MOVETO (0,0,100);
+    FACES ((0,1,2,3));
+    SURFACE "standard";
+  );
+  POLYEDER "wall2" (
+    BASEPOINTS ((400,80,-80), (400,-80,-80),
+                (400,-80,80), (400,80,80));
+    FACES ((0,1,2,3));
+    SURFACE "wallpaper";
+  );
+  POLYEDER "wall1" (
+    BASEPOINTS ((1100,1000,-1000), (1100,-1000,-1000),
+                (1100,-1000,1000), (1100,1000,1000));
+    FACES ((0,1,2,3));
+    SURFACE "wallpaper";
+  );
+  VEHICLE "robbi"(
+    RESTR_TRANS_X(-10,10,10);
+    RESTR_ROT_Z(-1,0,1);
+  )[
+    CAMERA "line-cam"(
+      RESOLUTION (110,1);
+      SIZE (1,0.01);
+      ZBUFFER;
+      TURNY 90;
+      TURNX 90;
+    );
+    FACETTE "line-fac"(
+      RESOLUTION (110,1);
+      SIZE (45,0.3);
+      TURNY 90;
+      TURNX 90;
+    );
+  ]
+].

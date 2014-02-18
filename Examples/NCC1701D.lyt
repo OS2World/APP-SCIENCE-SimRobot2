@@ -1,0 +1,32 @@
+SimRobot Layout
+2
+0 18 14 690 514
+.
+0 3 2
+0 198 329 482 113
+0 0 0
+1 6
+Tree
+0 0 0 197 442
+1 0 0 12 16 106 238
+Object
+0 197 0 245 257
+.
+5 0 1 9 156 157 4
+Sensor
+0 442 0 238 257
+.z.x.distance.camera.VALUE
+3 0 0.5
+Actor
+0 198 258 161 72
+.z.MOVE
+1 0
+Actor
+0 359 258 161 72
+.z.x.MOVE
+1 0
+Actor
+0 520 258 160 72
+.z.x.distance.MOVE
+1 0
+3 2 7 6 5 4 1 

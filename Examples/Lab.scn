@@ -1,0 +1,189 @@
+// Lab.scn:
+// An elaborated example. Shown is a room with diverse furniture,
+// somewhat resembling one of our rooms here in Bremen.
+// Since the camera has a high resolution, the image computation
+// lasts a while. In order to speed up the computation, remove
+// the comment in the 'QUICKSHADING' line.
+
+WORLD "Lab" (
+
+//  QUICKSHADING;
+
+  TEXTURE "blackboard" LOAD "lab.bmp";
+
+  SURFACE "s-blackboard" (0.0 ,0.2, 0.0) [
+    TEXTURE "blackboard" ((0,0,2),(0,0.2,2),(3,0,2))
+  ];
+  SURFACE "s-door"  (0.0, 0.4, 0.0);
+  SURFACE "s-wall"  (0.8, 0.8, 0.8);
+  SURFACE "s-table" (0.9, 0.9, 0.9);
+  SURFACE "s-legs" (0.1, 0.1, 0.1);
+  SURFACE "s-floor" (0.4, 0.2, 0.3);
+  SURFACE "s-sideboard" (0.6, 0.1, 0.0);
+  SURFACE "s-window" (1.2, 1.2, 1.2);
+  SURFACE "s-wood"  (0.4, 0.3, 0.0);
+
+  MACRO 
+    POLYEDER "tableleg" (
+      BASEPOINTS ((0,0,0), (0,3,0), (3,3,0), (3,0,0));
+      SWEEP (0,0,70);
+      SURFACE "s-legs";
+    );
+
+  MACRO 
+    GROUP "table" [
+      POLYEDER "plate" (
+        BASEPOINTS ((0,0,0), (0,80,0), (80,80,0),(80,0,0));
+        FACES ((0,1,2,3));
+        SURFACE "s-table";
+        MOVETO (0, 0, 71);
+      );
+      MACRO "tableleg" AS "leg1" (MOVETO (0,0,0));
+      MACRO "tableleg" AS "leg2" (MOVETO (0,77,0));      
+      MACRO "tableleg" AS "leg3" (MOVETO (77,77,0));      
+      MACRO "tableleg" AS "leg3" (MOVETO (77,0,0));
+    ];
+
+  MACRO
+    POLYEDER "chairleg" (
+      BASEPOINTS ((0,0,0), (0,2,0), (2,2,0), (2,0,0));
+      SWEEP (0,0,45);
+      SURFACE "s-legs";
+    );
+
+  MACRO
+    GROUP "chair" [
+      POLYEDER "place" (
+        BASEPOINTS ((0,0,0), (40,0,0), (0,45,0), (40,45,0));
+        FACES ((0,1,3,2));
+        SURFACE "s-wood";
+        MOVETO (0,0,45);
+      );
+      MACRO "chairleg" AS "leg1" (MOVETO (0,0,0));
+      MACRO "chairleg" AS "leg2" (MOVETO (38,0,0));
+      MACRO "chairleg" AS "leg3" (MOVETO (0,43,0));
+      MACRO "chairleg" AS "leg4" (MOVETO (38,43,0));
+      POLYEDER "lehne" (
+        BASEPOINTS ((0,0,0), (0,45,0), (0,0,20), (0,45,20));
+        FACES ((0,1,3,2));
+        SURFACE "s-wood";
+        MOVETO (0,0,55);
+      );
+      POLYEDER "armsupport" (
+        BASEPOINTS ((0,0,0), (0,2,0), (2,0,0), (2,2,0));
+        SWEEP (0,0,20);
+        SURFACE "s-legs";
+        MOVETO (-2,21.5,45);
+      )
+    ];
+
+  MACRO 
+    POLYEDER "sideboard" (
+      BASEPOINTS ((0,0,0), (30,0,0), (0,150,0), (30,150,0));
+      FACES ((0,1,3,2));
+      SURFACE "s-sideboard";
+      COLOR (0.6, 0, 0);
+    );
+
+  MACRO 
+    GROUP "sideboardwall" [
+      POLYEDER "out" (
+        BASEPOINTS ((0,0,0), (30,0,0), (0,150,0), (30,150,0),
+                    (0,0,180), (30,0,180), (0,150,180), (30,150,180));
+        FACES ((0,1,3,2), (4,5,7,6), (0,1,5,4), (2,3,7,6));
+        SURFACE "s-sideboard";
+        COLOR (0.6, 0, 0);
+      );
+      MACRO "sideboard" AS "sideboard1" (MOVETO (0,0,45));
+      MACRO "sideboard" AS "sideboard2" (MOVETO (0,0,90));
+      MACRO "sideboard" AS "sideboard3" (MOVETO (0,0,135));
+    ];
+
+  MACRO 
+    GROUP "window" [
+      POLYEDER "auxlight" (
+        BASEPOINTS ((0,0,270), (0,100,270), (0,0,240), (0,100,240));
+        FACES ((0,1,3,2));
+        SURFACE "s-window";
+        TRANSPARENT;
+      );
+      POLYEDER "mainlight" (
+        BASEPOINTS ((0,0,230), (0,100,230), (0,0,90), (0,100,90));
+        FACES ((0,1,3,2));
+        SURFACE "s-window";
+        TRANSPARENT;
+      )
+    ];
+
+  MACRO
+    POLYEDER "door" (
+      BASEPOINTS ((0,0,0), (90,0,0), (0,0,200), (90,0,200));
+      FACES ((0,1,3,2));
+      SURFACE "s-door";
+      COLOR (0,0.7,0);
+    );
+
+  MACRO
+    RADIALEMITTER "lamp" (
+      RADIATION (1.0, 1.0, 1.0);
+      FACTOR 10000;
+      START 1.0;
+    );
+
+  MOVETO (-250,-250,0);
+
+) [
+
+  POLYEDER "walls" (
+    BASEPOINTS ((0,0,0), (0,500,0), (500,0,0), (500,500,0),
+                (0,0,280), (0,500,280), (500,0,280), (500,500,280));
+    FACES ((0,1,3,2;"s-floor"), (0,1,5,4), (1,3,7,5), (3,2,6,7), (2,0,4,6));
+    SURFACE "s-wall";
+    TRANSPARENT;
+  );
+
+  MACRO "door" AS "door1" (MOVETO (30,0.1,0));
+  MACRO "door" AS "door2" (MOVETO (30,499.9,0));
+  MACRO "sideboardwall" AS "sideboardwall1" (MOVETO (0,100,0));
+  MACRO "window" AS "window1" (MOVETO (499.9, 20, 0));
+  MACRO "window" AS "window2" (MOVETO (499.9, 140, 0));
+  MACRO "window" AS "window3" (MOVETO (499.9, 260, 0));
+  MACRO "window" AS "window4" (MOVETO (499.9, 380, 0));
+
+  POLYEDER "blackboard" (
+    BASEPOINTS ((0,0,210), (280,0,210), (0,0,90), (280,0,90));
+    FACES ((3,2,0,1));
+    SURFACE "s-blackboard";
+    MOVETO (160,1,0);
+    COLOR (0,0.6,0);
+  );
+
+  MACRO "table" AS "table1" (MOVETO (150,418,0));
+  MACRO "table" AS "table2" (MOVETO (410,60,0));
+  MACRO "chair" AS "chair1" (TURNZ 100; MOVETO (460, 30, 0));
+
+  
+  MACRO "lamp" AS "lamp1" (MOVETO (150,150,279));
+  MACRO "lamp" AS "lamp2" (MOVETO (350,150,279));
+  MACRO "lamp" AS "lamp3" (MOVETO (350,350,279));
+  MACRO "lamp" AS "lamp4" (MOVETO (150,350,279));
+
+  TURNABLE "joint1" (
+    Z_AXIS;
+    RANGE (0, 90);
+    START 30;
+    FACTOR 10;
+    MOVETO (30, 450, 270);
+  ) [
+    CAMERA "camera1" (
+      RESOLUTION (200, 200);
+      SIZE (1,1);
+      TURNZ 180;
+      TURNX 115;
+      CLASS 0;
+      CLASS 1;
+      CLASS 2;
+      ZBUFFER;
+    );
+  ];
+].
